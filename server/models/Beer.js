@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+const brewerySchema = require("./Brewery");
 
 const beerSchema = new Schema(
   {
@@ -29,6 +29,7 @@ const beerSchema = new Schema(
       type: Number,
       required: true,
     },
+    beerBrewery: { brewerySchema },
   },
   {
     toJSON: {
