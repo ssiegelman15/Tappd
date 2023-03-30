@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const beerSchema = require("./Beer");
+const brewerySchema = require("./Brewery");
 
 const userSchema = new Schema(
   {
@@ -21,9 +22,9 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    // savedMovies: [movieSchema],
-    // likedMovies: [movieSchema],
-    // favoriteMovies: [movieSchema],
+    savedMovies: [beerSchema],
+    ratedMovies: [beerSchema],
+    favoriteBreweries: [brewerySchema],
   },
   {
     toJSON: {
