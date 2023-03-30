@@ -1,15 +1,18 @@
 const db = require("../config/connection");
-const { User, Beer } = require("../models");
+const { User, Beer, Brewery } = require("../models");
 const userSeeds = require("./userSeeds.json");
-const beerSeeds = require("./beerrSeeds.json");
+const beerSeeds = require("./beerSeeds.json");
+const brewerySeeds = require("./brewerySeeds.json");
 
 db.once("open", async () => {
   try {
     await User.deleteMany({});
     await Beer.deleteMany({});
+    await Brewery.deleteMany({});
 
     await User.create(userSeeds);
     await Beer.create(beerSeeds);
+    await Beer.create(brewerySeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);
