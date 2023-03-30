@@ -6,27 +6,34 @@ const resolvers = {
   // Queries
   Query: {
     users: async () => {
-      return User.find().populate("ratedBeers").sort({ savedMovies: "ASC" });
+      return User.find().populate("ratedBeers").sort({ ratedBeers: "ASC" });
     },
     user: async (parent, { username }) => {
       return await User.findOne({ username })
-        .populate("savedMovies")
-        .populate("likedMovies")
-        .populate("favoriteMovies");
+        .populate("savedBeers")
+        .populate("ratedBeers")
+        .populate("favoriteBreweries");
     },
-    movies: async (parent, { username }) => {
+    beers: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Movie.find(params).sort({ createdAt: -1 });
+      return Beer.find(params).sort({ createdAt: -1 });
     },
-    movie: async (parent, { movieId }) => {
-      return Movie.findOne({ _id: movieId });
+    beer: async (parent, { beerId }) => {
+      return Beer.findOne({ _id: beerId });
+    },
+    breweries: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return Brewery.find(params).sort({ createdAt: -1 });
+    },
+    brewery: async (parent, { breweryId }) => {
+      return Brewery.findOne({ _id: breweryId });
     },
     me: async (parent, args, context) => {
       if (context.user) {
         return await User.findOne({ _id: context.user._id })
-          .populate("savedMovies")
-          .populate("likedMovies")
-          .populate("favoriteMovies");
+          .populate("savedBeers")
+          .populate("ratedBeers")
+          .populate("favoriteBreweries");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -58,14 +65,14 @@ const resolvers = {
 
       return { token, user };
     },
-    // Save movie mutation
-    saveMovie: async (parent, { movie }, context) => {
+    // Save beer mutation
+    saveBeer: async (parent, { beer }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
-              savedMovies: movie,
+              savedBeers: beer,
             },
           },
           {
@@ -76,14 +83,14 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
-    // Like movie mutation
-    likeMovie: async (parent, { movie }, context) => {
+    // rated Beer mutation
+    ratedBeers: async (parent, { beer }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
-              likedMovies: movie,
+              likedMovies: beer,
             },
           },
           {
@@ -92,14 +99,14 @@ const resolvers = {
         );
       }
     },
-    //Favorite movie mutation
-    favoriteMovie: async (parent, { movie }, context) => {
+    //Favorite Brewery mutation
+    favoriteBreweries: async (parent, { brewery }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
             $addToSet: {
-              favoriteMovies: movie,
+              favoriteMovies: brewery,
             },
           },
           {
@@ -108,13 +115,13 @@ const resolvers = {
         );
       }
     },
-    // Remove saved movie mutation
-    removeMovie: async (parent, { movieId }, context) => {
+    // Remove saved Beer mutation
+    removeBeer: async (parent, { beerId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $pull: { savedMovies: { movieId: movieId } },
+            $pull: { savedBeers: { beerId: beerId } },
           },
           { new: true }
         );
@@ -122,26 +129,13 @@ const resolvers = {
 
       throw new AuthenticationError("You need to be logged in!");
     },
-    //remove liked Movie
-    unlikeMovie: async (parent, { movieId }, context) => {
+    //remove favorited Brewery mutation
+    removeBrewery: async (parent, { breweryId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
           {
-            $pull: { likedMovies: { movieId: movieId } },
-          },
-          { new: true }
-        );
-      }
-      throw new AuthenticationError("You need to be logged in!");
-    },
-    //remove favorite Movies
-    unfavoriteMovie: async (parent, { movieId }, context) => {
-      if (context.user) {
-        return User.findOneAndUpdate(
-          { _id: context.user._id },
-          {
-            $pull: { favoriteMovies: { movieId: movieId } },
+            $pull: { favoriteBreweries: { breweryId: breweryId } },
           },
           { new: true }
         );

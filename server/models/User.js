@@ -22,8 +22,8 @@ const userSchema = new Schema(
       required: true,
       minlength: 5,
     },
-    savedMovies: [beerSchema],
-    ratedMovies: [beerSchema],
+    savedBeers: [beerSchema],
+    ratedBeers: [beerSchema],
     favoriteBreweries: [brewerySchema],
   },
   {
