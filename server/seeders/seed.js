@@ -12,7 +12,7 @@ db.once("open", async () => {
 
     await User.create(userSeeds);
     await Beer.create(beerSeeds);
-    await Beer.create(brewerySeeds);
+    await Brewery.create(brewerySeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);
