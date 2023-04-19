@@ -50,19 +50,14 @@ const resolvers = {
     // Log in mutation
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError("No user found with this email address");
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const token = signToken(user);
-
       return { token, user };
     },
     // Save beer mutation
@@ -90,7 +85,7 @@ const resolvers = {
           { _id: context.user._id },
           {
             $addToSet: {
-              likedMovies: beer,
+              ratedBeers: beer,
             },
           },
           {
@@ -106,7 +101,7 @@ const resolvers = {
           { _id: context.user._id },
           {
             $addToSet: {
-              favoriteMovies: brewery,
+              favoriteBreweries: brewery,
             },
           },
           {
