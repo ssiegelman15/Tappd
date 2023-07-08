@@ -30,15 +30,16 @@ const typeDefs = gql`
     breweryLocation: String
   }
 
-  # input inputMovie {
-  #   movieId: Int
-  #   title: String
-  #   description: String
-  #   image: String
-  #   backdrop: String
-  #   trailer: String
-  #   createdAt: String
-  # }
+  input inputBeer {
+    beerId: Int
+    beerName: String
+    beerImage: String
+    beerDescription: String
+    beerStyle: String
+    beerAbv: String
+    createdAt: String
+    beerBrewery: [brewerySchema]!
+  }
 
   type Auth {
     token: ID!
