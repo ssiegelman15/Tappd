@@ -13,5 +13,20 @@
         "beerBrewery": "The Alchemist"
       }
     ]
+  },
+  {
+    "username": "edrucker",
+    "email": "edrucker@gmail.com ",
+    "password": "password02",
+    "savedBeers": [
+      {
+        "beerId": 2,
+        "beerName": "Focal Banger",
+        "beerDescription": "American IPA with Citra & Mosaic hops.",
+        "beerStyle": "American India Pale Ale",
+        "beerAbv": 7,
+        "beerBrewery": "The Alchemist"
+      }
+    ]
   }
 ]
