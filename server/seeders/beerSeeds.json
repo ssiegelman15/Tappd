@@ -1,0 +1,18 @@
+[
+  {
+    "beerId": 1,
+    "beerName": "Heady Topper",
+    "beerDescription": "We love hops – that’s why our flagship Double IPA, Heady Topper, is packed full of them. Heady Topper was designed to showcase the complex flavors and aromas these flowers produce. The Alchemist has been brewing Heady Topper since 2003. This Double IPA is not intended to be the strongest or most bitter DIPA. It is brewed to give you wave after wave of hop flavor without any astringent bitterness. We brew Heady Topper with a proprietary blend of six hops – each imparting its own unique flavor and aroma. Take a big sip of Heady and see what hop flavors you can pick out. Orange? Tropical Fruit? Pink Grapefruit? Pine? Spice? There is just enough malt to give this beer some backbone, but not enough to take the hops away from the center stage.",
+    "beerStyle": "Hazy India Pale Ale",
+    "beerAbv": 8,
+    "beerBrewery": "The Alchemist"
+  },
+  {
+    "beerId": 2,
+    "beerName": "Focal Banger",
+    "beerDescription": "American IPA with Citra & Mosaic hops.",
+    "beerStyle": "American India Pale Ale",
+    "beerAbv": 7,
+    "beerBrewery": "The Alchemist"
+  }
+]
