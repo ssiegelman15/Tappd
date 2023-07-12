@@ -1,5 +1,5 @@
-const { Schema, model } = require("mongoose");
-const brewerySchema = require("./Brewery");
+const { Schema, model } = require('mongoose');
+const brewerySchema = require('./Brewery');
 
 const beerSchema = new Schema(
   {
@@ -33,11 +33,11 @@ const beerSchema = new Schema(
       type: Number,
       required: true,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
-      get: (timestamp) => dateFormat(timestamp),
-    },
+    // createdAt: {
+    //   type: Date,
+    //   default: Date.now,
+    //   get: (timestamp) => dateFormat(timestamp),
+    // },
     beerBrewery: { brewerySchema },
   },
   {
@@ -47,6 +47,6 @@ const beerSchema = new Schema(
   }
 );
 
-const Beer = model("Beer", beerSchema);
+const Beer = model('Beer', beerSchema);
 
 module.exports = Beer;
